@@ -1,4 +1,7 @@
+export { default as AppLayout } from './AppLayout.jsx'
 export { Button } from './Button.jsx'
+export { default as Header } from './Header.jsx'
 export { Heading } from './Heading.jsx'
 export { Input } from './Input.jsx'
 export { Row } from './Row.jsx'
+export { default as Sidebar } from './Sidebar.jsx'
