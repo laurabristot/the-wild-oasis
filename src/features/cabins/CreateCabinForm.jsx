@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import styled from 'styled-components'
+import { createCabin } from '../../services/apiCabins'
 import { Button, FileInput, Form, Input, Textarea } from '../../ui'
 
 const FormRow = styled.div`
@@ -40,10 +43,24 @@ const Error = styled.span`
 `
 
 function CreateCabinForm() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
+
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading: isCreatingCabin } = useMutation({
+    mutationFn: createCabin,
+    onSuccess: () => {
+      toast.success('New cabin sucessfully created')
+      queryClient.invalidateQueries({ queryKey: ['cabins'] })
+      reset()
+    },
+    onError: (err) => {
+      toast.error(err.message)
+    }
+  })
 
   function onSubmit(data) {
-    console.log(data)
+    mutate(data)
   }
 
   return (
@@ -93,7 +110,7 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
+        <Button disabled={isCreatingCabin}>Edit cabin</Button>
       </FormRow>
     </Form>
   )
