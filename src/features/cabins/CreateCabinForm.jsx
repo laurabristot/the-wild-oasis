@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import styled from 'styled-components'
-import { createEditCabin } from '../../services/apiCabins'
 import { Button, FileInput, Form, FormRow, Input, Textarea } from '../../ui'
+import useCreateCabin from './useCreateCabin'
+import useEditCabin from './useEditCabin'
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -35,6 +34,8 @@ const StyledFormRow = styled.div`
 `
 
 function CreateCabinForm({ cabinToEdit = {} }) {
+  const { createCabin, isCreatingCabin } = useCreateCabin()
+  const { editCabin, isEditingCabin } = useEditCabin()
   const { id: editId, ...editValues } = cabinToEdit
   const isEditSession = Boolean(editId)
 
@@ -43,38 +44,16 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   })
   const { errors } = formState
 
-  const queryClient = useQueryClient()
-
-  const { mutate: createCabin, isLoading: isCreatingCabin } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('New cabin sucessfully created')
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-      reset()
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    }
-  })
-  const { mutate: editCabin, isLoading: isEditingCabin } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success('Cabin sucessfully edited')
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-      reset()
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    }
-  })
-
   const isWorking = isCreatingCabin || isEditingCabin
 
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image[0]
     if (isEditSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId })
-    else createCabin({ ...data, image })
+      editCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        { onSuccess: (data) => reset() }
+      )
+    else createCabin({ ...data, image }, { onSuccess: (data) => reset() })
   }
 
   function onError(errors) {
@@ -143,11 +122,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         />
       </FormRow>
 
-      <FormRow
-        label="Description"
-        error={errors?.description?.message}
-        disabled={isWorking}
-      >
+      <FormRow label="Description" error={errors?.description?.message}>
         <Textarea
           type="number"
           id="description"
