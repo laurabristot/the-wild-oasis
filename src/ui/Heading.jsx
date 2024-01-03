@@ -1,7 +1,7 @@
 /* eslint-disable no-constant-condition */
 import styled, { css } from 'styled-components'
 
-export const Heading = styled.h1`
+const Heading = styled.h1`
   ${(props) =>
     props.as === 'h1' &&
     css`
@@ -22,3 +22,4 @@ export const Heading = styled.h1`
     `}
   line-height: 1.4;
 `
+export default Heading
