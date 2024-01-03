@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import styled from 'styled-components'
 import { deleteCabin } from '../../services/apiCabins'
 import { formatCurrency } from '../../utils/helpers'
+import { CreateCabinForm } from '../index'
 
 const TableRow = styled.div`
   display: grid;
@@ -45,6 +47,7 @@ const Discount = styled.div`
 `
 
 export default function CabinRow({ cabin }) {
+  const [showForm, setShowForm] = useState(false)
   const {
     image,
     name,
@@ -68,16 +71,27 @@ export default function CabinRow({ cabin }) {
   })
 
   return (
-    <TableRow>
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-      <div>Fits up to {maxCapacity} guests</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
+    <>
+      <TableRow>
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity} guests</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        <Discount>{formatCurrency(discount)}</Discount>
 
-      <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
-        Delete
-      </button>
-    </TableRow>
+        <div>
+          <button
+            onClick={() => setShowForm((show) => !show)}
+            disabled={isDeleting}
+          >
+            Edit
+          </button>
+          <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
+            Delete
+          </button>
+        </div>
+      </TableRow>
+      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+    </>
   )
 }
