@@ -1,5 +1,6 @@
 export { default as AppLayout } from './AppLayout.jsx'
 export { default as Button } from './Button'
+export { default as ConfirmDelete } from './ConfirmDelete'
 export { default as FileInput } from './FileInput'
 export { default as Form } from './Form'
 export { default as FormRow } from './FormRow'
