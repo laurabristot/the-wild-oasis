@@ -1,23 +1,11 @@
 /* eslint-disable react/prop-types */
 import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2'
 import styled from 'styled-components'
-import { ConfirmDelete, Modal } from '../../ui'
+import { ConfirmDelete, Modal, Table } from '../../ui'
 import { formatCurrency } from '../../utils/helpers'
 import { CreateCabinForm } from '../index'
 import useCreateCabin from './useCreateCabin'
 import { useDeleteCabin } from './useDeleteCabin'
-
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`
 
 const Img = styled.img`
   display: block;
@@ -73,7 +61,7 @@ export default function CabinRow({ cabin }) {
   }
 
   return (
-    <TableRow>
+    <Table.Row>
       <Img src={image} />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity} guests</div>
@@ -114,6 +102,6 @@ export default function CabinRow({ cabin }) {
           </Modal.Window>
         </Modal>
       </div>
-    </TableRow>
+    </Table.Row>
   )
 }
