@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2'
 import styled from 'styled-components'
-import { ConfirmDelete, Modal, Table } from '../../ui'
+import { ConfirmDelete, Menus, Modal, Table } from '../../ui'
 import { formatCurrency } from '../../utils/helpers'
 import { CreateCabinForm } from '../index'
 import useCreateCabin from './useCreateCabin'
@@ -73,26 +74,31 @@ export default function CabinRow({ cabin }) {
       )}
 
       <div>
-        <button onClick={handleDuplicateCabin} disabled={isWorking}>
-          <HiSquare2Stack />
-        </button>
-
         <Modal>
-          <Modal.Open opens="edit">
-            <button>
-              <HiPencil />
-            </button>
-          </Modal.Open>
+          <Menus.Menu>
+            <Menus.Toggle id={cabin.id} />
+            <Menus.List id={cabin.id}>
+              <Menus.Button
+                onClick={handleDuplicateCabin}
+                icon={<HiSquare2Stack />}
+              >
+                Duplicate
+              </Menus.Button>
+
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+          </Menus.Menu>
 
           <Modal.Window name="edit">
             <CreateCabinForm cabinToEdit={cabin} />
           </Modal.Window>
 
-          <Modal.Open opens="delete">
-            <button>
-              <HiTrash />
-            </button>
-          </Modal.Open>
           <Modal.Window name="delete">
             <ConfirmDelete
               resourceName="cabins"
