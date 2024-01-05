@@ -24,8 +24,6 @@ export default function CabinTable() {
     (a, b) => (a[field] - b[field]) * modifier
   )
 
-  console.log(sortBy)
-
   if (isLoading) {
     return <Spinner />
   }
