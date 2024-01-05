@@ -47,12 +47,7 @@ function CheckinBooking() {
   } = booking || {}
 
   const confirmPayment = () => {
-    const confirmation = confirm(
-      'Are you sure you want to confirm the payment? this action cant be undone'
-    )
-    if (confirmation) {
-      setConfirmPaid((confirmPaid) => !confirmPaid)
-    }
+    setConfirmPaid((confirmPaid) => !confirmPaid)
   }
 
   const confirmBreakfast = () => {
@@ -116,7 +111,7 @@ function CheckinBooking() {
         <Checkbox
           checked={confirmPaid}
           onChange={confirmPayment}
-          disabled={confirmPaid || isCheckinIn}
+          // disabled={confirmPaid || isCheckinIn}
           id="confirm"
         >
           I confirm that {guests.fullName} have paid the total amount of{' '}
