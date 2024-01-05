@@ -13,6 +13,7 @@ import BookingDataBox from './BookingDataBox'
 
 import { useNavigate } from 'react-router-dom'
 import { useMoveBack } from '../../hooks/useMoveBack'
+import useCheckout from '../check-in-out/useCheckout'
 import useBooking from './useBooking'
 
 const HeadingGroup = styled.div`
@@ -23,6 +24,8 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking()
+  const { checkout } = useCheckout()
+
   const { status, id: bookingId } = booking || {}
 
   const navigate = useNavigate()
@@ -56,6 +59,9 @@ function BookingDetail() {
           >
             Check in
           </Button>
+        )}
+        {status === 'checked-in' && (
+          <Button onClick={() => checkout(bookingId)}>Check out</Button>
         )}
         <Button variation="secondary" onClick={moveBack}>
           Back
