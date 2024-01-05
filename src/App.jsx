@@ -7,6 +7,7 @@ import GlobalStyles from './styles/GlobalStyles'
 import {
   Account,
   Bookings,
+  BookingsDetails,
   Cabins,
   Dashboard,
   Login,
@@ -38,6 +39,7 @@ export default function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
+              <Route path="bookings/:bookingId" element={<BookingsDetails />} />
               <Route path="cabins" element={<Cabins />} />
               {/* <Route path="checkin/:bookingID" element={< />} /> */}
               <Route path="settings" element={<Settings />} />

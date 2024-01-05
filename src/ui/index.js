@@ -1,5 +1,7 @@
 export { default as AppLayout } from './AppLayout.jsx'
 export { default as Button } from './Button'
+export { default as ButtonGroup } from './ButtonGroup'
+export { default as ButtonText } from './ButtonText'
 export { default as ConfirmDelete } from './ConfirmDelete'
 export { default as Empty } from './Empty'
 export { default as FileInput } from './FileInput'

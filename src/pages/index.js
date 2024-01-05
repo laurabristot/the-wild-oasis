@@ -1,5 +1,6 @@
 export { default as Account } from './Account.jsx'
 export { default as Bookings } from './Bookings.jsx'
+export { default as BookingsDetails } from './BookingsDetails.jsx'
 export { default as Cabins } from './Cabins.jsx'
 export { default as Dashboard } from './Dashboard.jsx'
 export { default as Login } from './Login.jsx'
