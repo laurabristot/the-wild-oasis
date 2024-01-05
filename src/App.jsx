@@ -9,6 +9,7 @@ import {
   Bookings,
   BookingsDetails,
   Cabins,
+  Checkin,
   Dashboard,
   Login,
   PageNotFound,
@@ -40,8 +41,8 @@ export default function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:bookingId" element={<BookingsDetails />} />
+              <Route path="checkin/:bookingId" element={<Checkin />} />
               <Route path="cabins" element={<Cabins />} />
-              {/* <Route path="checkin/:bookingID" element={< />} /> */}
               <Route path="settings" element={<Settings />} />
               <Route path="users" element={<Users />} />
               <Route path="account" element={<Account />} />

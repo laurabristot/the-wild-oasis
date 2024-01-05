@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { Menus, Table, Tag } from '../../ui'
 
-import { HiEye } from 'react-icons/hi2'
+import { HiArrowDownOnSquare, HiEye } from 'react-icons/hi2'
 import { useNavigate } from 'react-router-dom'
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers'
 
@@ -93,6 +93,14 @@ function BookingRow({
           >
             See details
           </Menus.Button>
+          {status === 'unconfirmed' && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
+            >
+              Check in
+            </Menus.Button>
+          )}
         </Menus.List>
       </Menus.Menu>
     </Table.Row>
