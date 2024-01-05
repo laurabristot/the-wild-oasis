@@ -1,9 +1,9 @@
-import { Empty, Menus, Spinner, Table } from '../../ui'
+import { Empty, Menus, Pagination, Spinner, Table } from '../../ui'
 import BookingRow from './BookingRow'
 import useBookings from './useBookings'
 
 function BookingTable() {
-  const { bookings, isLoading } = useBookings()
+  const { bookings, isLoading, count } = useBookings()
 
   if (isLoading) return <Spinner />
 
@@ -27,6 +27,10 @@ function BookingTable() {
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menus>
   )
