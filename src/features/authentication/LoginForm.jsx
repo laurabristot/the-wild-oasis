@@ -3,8 +3,8 @@ import { Button, Form, FormRowVertical, Input, SpinnerMini } from '../../ui'
 import useLogin from './useLogin'
 
 function LoginForm() {
-  const [email, setEmail] = useState('laura@email.com')
-  const [password, setPassword] = useState('pass123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const { login, isLoading } = useLogin()
 
   function handleSubmit(e) {
