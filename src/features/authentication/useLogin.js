@@ -11,8 +11,7 @@ export default function useLogin() {
     onSuccess: () => {
       navigate('/dashboard')
     },
-    onError: (err) => {
-      console.log('error', err)
+    onError: () => {
       toast.error('Provided email or password are incorrect')
     }
   })
