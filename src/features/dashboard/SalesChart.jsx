@@ -45,6 +45,9 @@ export default function SalesChart({ bookings, numDays }) {
     }
   })
 
+  const fromDate = format(allDates.at(0), 'MMM dd yyyy')
+  const toDate = format(allDates.at(-1), 'MMM dd yyyy')
+
   const colors = isDarkMode
     ? {
         totalSales: { stroke: '#4f46e5', fill: '#4f46e5' },
@@ -61,7 +64,9 @@ export default function SalesChart({ bookings, numDays }) {
 
   return (
     <StyledSalesChart>
-      <Heading as="h2">Sales</Heading>
+      <Heading as="h2">
+        Sales from {fromDate} to {toDate}
+      </Heading>
 
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
