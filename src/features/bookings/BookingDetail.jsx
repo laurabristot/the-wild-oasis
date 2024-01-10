@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   ButtonText,
   ConfirmDelete,
+  Empty,
   Heading,
   Modal,
   Row,
@@ -43,6 +44,7 @@ function BookingDetail() {
     'checked-out': 'silver'
   }
   if (isLoading) return <Spinner />
+  if (!booking) return <Empty resource="booking" />
 
   return (
     <>
