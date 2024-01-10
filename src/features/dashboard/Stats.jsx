@@ -21,7 +21,7 @@ export default function Stats({
     bookings.reduce((acc, cur) => acc + cur.totalPrice, 0)
   )
   const checkins = confirmedStays.length
-  console.log(confirmedStays)
+
   const occupation =
     Math.round(
       (confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
