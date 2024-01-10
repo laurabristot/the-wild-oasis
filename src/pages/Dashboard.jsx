@@ -1,11 +1,15 @@
+import { DashboardFilter, DashboardLayout } from '../features/dashboard'
 import { Heading, Row } from '../ui'
 
 function Dashboard() {
   return (
-    <Row type="horizontal">
-      <Heading as="h1">Dashboard</Heading>
-      <p>TEST</p>
-    </Row>
+    <>
+      <Row type="horizontal">
+        <Heading as="h1">Dashboard</Heading>
+        <DashboardFilter />
+      </Row>
+      <DashboardLayout />
+    </>
   )
 }
 
