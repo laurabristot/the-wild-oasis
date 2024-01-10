@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import GlobalStyles from './styles/GlobalStyles'
 
+import { DarkModeProvider } from './context/DarkModeContext'
 import {
   Account,
   Bookings,
@@ -30,7 +31,7 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <>
+    <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <GlobalStyles />
@@ -75,6 +76,6 @@ export default function App() {
           }}
         />
       </QueryClientProvider>
-    </>
+    </DarkModeProvider>
   )
 }
